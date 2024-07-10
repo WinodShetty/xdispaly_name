@@ -4,19 +4,30 @@ function FullNameDisplay() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fullName, setFullName] = useState('');
-  const [error, setError] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let hasError = false;
 
-    
-    if (!firstName || !lastName) {
-      setError('Both fields are required.');
-      return;
+    if (!firstName) {
+      setFirstNameError('Please fill out this field.');
+      hasError = true;
+    } else {
+      setFirstNameError('');
     }
 
-    setFullName(`${firstName} ${lastName}`);
-    setError('Please fill out this field'); 
+    if (!lastName) {
+      setLastNameError('Please fill out this field.');
+      hasError = true;
+    } else {
+      setLastNameError('');
+    }
+
+    if (!hasError) {
+      setFullName(`${firstName} ${lastName}`);
+    }
   };
 
   return (
@@ -30,6 +41,7 @@ function FullNameDisplay() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
+          {firstNameError && <p style={{ color: 'red' }}>{firstNameError}</p>}
         </div>
         <div>
           <label>Last Name:</label>
@@ -38,11 +50,11 @@ function FullNameDisplay() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+          {lastNameError && <p style={{ color: 'red' }}>{lastNameError}</p>}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!firstName || !lastName}>Submit</button>
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>Full Name: {fullName}</p>
+      {fullName && <p>Full Name: {fullName}</p>}
     </div>
   );
 }
