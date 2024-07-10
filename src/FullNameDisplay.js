@@ -4,10 +4,19 @@ function FullNameDisplay() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fullName, setFullName] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    
+    if (!firstName || !lastName) {
+      setError('Both fields are required.');
+      return;
+    }
+
     setFullName(`${firstName} ${lastName}`);
+    setError(''); 
   };
 
   return (
@@ -32,6 +41,7 @@ function FullNameDisplay() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>Full Name: {fullName}</p>
     </div>
   );
