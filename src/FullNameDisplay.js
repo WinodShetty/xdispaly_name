@@ -16,7 +16,7 @@ function FullNameDisplay() {
     }
 
     setFullName(`${firstName} ${lastName}`);
-    setError(''); 
+    setError('Please fill out this field'); 
   };
 
   return (
