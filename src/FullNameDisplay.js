@@ -50,4 +50,13 @@ function FullNameDisplay() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-          {lastNameError && <p style={{ color: 'red' }}
+          {lastNameError && <p style={{ color: 'red' }}>{lastNameError}</p>}
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      {fullName && <p>Full Name: {fullName}</p>}
+    </div>
+  );
+}
+
+export default FullNameDisplay;
